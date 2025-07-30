@@ -1,9 +1,11 @@
 # Practice on Long Sequential User Behavior Modeling for Click-Through Rate Prediction
-Implementation of Practice on Long Sequential User Behavior Modeling for Click-Through Rate Prediction using tensorflow
+Implementation of Practice on Long Sequential User Behavior Modeling for Click-Through Rate Prediction.
+The original code was based on TensorFlow 1.4 with Python 2. This repository now provides
+a PyTorch implementation runnable with Python 3.
 
 ## Prerequisites
-- Python 2.x
-- Tensorflow 1.4
+- Python 3
+- PyTorch
 
 ## Data
 - [Amazon Book Data](http://jmcauley.ucsd.edu/data/amazon/)<br/>
@@ -47,6 +49,24 @@ python script/train_book.py -p test --random_seed 19 --model_type DNN
 The model below had been supported: 
 - DNN 
 - PNN 
+- DIN
+- GRU4REC
+- ARNN
+- RUM
+- DIEN
+- DIEN_with_neg
+
+### PyTorch Example
+The repository also provides a simplified PyTorch version of the DNN model.
+You can train it with:
+```
+python script/train_book_pytorch.py -p train
+python script/train_taobao_pytorch.py -p train
+```
+
+The model below had been supported:
+- DNN
+- PNN
 - DIN
 - GRU4REC
 - ARNN

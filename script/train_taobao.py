@@ -9,7 +9,7 @@ import sys
 from utils import *
 import multiprocessing
 import argparse
-import cPickle as pkl
+import pickle as pkl
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', type=str, default='train', help='train | test')
@@ -157,7 +157,7 @@ def train(
         elif model_type == 'MIMN_with_aux':
             model = Model_MIMN(n_uid, n_mid, EMBEDDING_DIM, HIDDEN_SIZE, BATCH_SIZE, Memory_Size, SEQ_LEN, Mem_Induction, Util_Reg, use_negsample=True, mask_flag=True) 
         else:
-            print ("Invalid model_type : %s", model_type)
+            print("Invalid model_type : %s" % model_type)
             return
         
         sess.run(tf.global_variables_initializer())
@@ -255,14 +255,14 @@ def test(
         elif model_type == 'MIMN_with_aux':
             model = Model_MIMN(n_uid, n_mid, EMBEDDING_DIM, HIDDEN_SIZE, BATCH_SIZE, Memory_Size, SEQ_LEN, Mem_Induction, Util_Reg, use_negsample=True, mask_flag=True) 
         else:
-            print ("Invalid model_type : %s", model_type)
+            print("Invalid model_type : %s" % model_type)
             return
 
         model.restore(sess, model_path)
         print('test_auc: %.4f ----test_loss: %.4f ---- test_accuracy: %.4f ---- test_aux_loss: %.4f' % eval(sess, test_data, model, model_path, batch_size))
 
 if __name__ == '__main__':
-    print sys.argv
+    print(sys.argv)
     args = parser.parse_args()
     SEED = args.random_seed
     Model_Type = args.model_type
