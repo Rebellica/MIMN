@@ -1,6 +1,6 @@
 import numpy
 import json
-import cPickle as pkl
+import pickle as pkl
 import random
 import numpy as np
 
@@ -36,6 +36,10 @@ class DataIterator:
     def __iter__(self):
         return self
 
+    # Python 3 iterator compatibility
+    def __next__(self):
+        return self.next()
+
     def reset(self):
         self.source.seek(0)
 
@@ -54,7 +58,7 @@ class DataIterator:
         neg_cate_list = []
         
         if len(self.source_buffer) == 0:
-            for k_ in xrange(self.k):
+            for k_ in range(self.k):
                 ss = self.source.readline()
                 if ss == "":
                     break
@@ -79,11 +83,11 @@ class DataIterator:
                 cate_id = int(ss[2])
                 label = int(ss[3])
 
-                hist_item = map(int, ss[4].split(","))
-                hist_cate = map(int, ss[5].split(","))
+                hist_item = list(map(int, ss[4].split(",")))
+                hist_cate = list(map(int, ss[5].split(",")))
                 
-                neg_item = map(int, ss[6].split(","))
-                neg_cate = map(int, ss[7].split(","))
+                neg_item = list(map(int, ss[6].split(",")))
+                neg_cate = list(map(int, ss[7].split(",")))
                 
                 source.append([uid, item_id, cate_id])
                 target.append([label, 1-label])
